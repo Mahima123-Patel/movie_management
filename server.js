@@ -8,11 +8,13 @@ import { swaggerDocs } from "./swagger/swagger.js";
 
 // app config
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 4000;
 
 // middleware
 app.use(express.json())
 app.use(cors())
+// error handler
+app.use(errorHandler);
 
 // database connection
 connectDB()
@@ -24,13 +26,15 @@ app.get("/", (req, res) => {
     res.send("API Working")
 })
 
-app.listen(port, () => {
-    console.log(`port started on ${port}`)
-})
 
 // swagger
 swaggerDocs(app, port);
 
+// start the server only if it is not in the test mode
+if (process.env.NODE_ENV !== "test") {
+    app.listen(port, () => {
+        console.log(`port started on ${port}`)
+    })
+}
 
-// error handler
-app.use(errorHandler);
+export default app;
