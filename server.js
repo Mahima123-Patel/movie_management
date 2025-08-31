@@ -13,7 +13,6 @@ const port = process.env.PORT
 // middleware
 app.use(express.json())
 app.use(cors())
-app.use(errorHandler);
 
 // database connection
 connectDB()
@@ -31,3 +30,7 @@ app.listen(port, () => {
 
 // swagger
 swaggerDocs(app, port);
+
+
+// error handler
+app.use(errorHandler);
