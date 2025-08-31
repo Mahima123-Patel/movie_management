@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import 'dotenv/config'
+import movieRoutes from "./routes/movieRoutes.js"
 
 // app config
 const app = express()
@@ -15,6 +16,8 @@ app.use(cors())
 connectDB()
 
 // api end points
+app.use("/movies", movieRoutes);
+
 app.get("/", (req, res) => {
     res.send("API Working")
 })
