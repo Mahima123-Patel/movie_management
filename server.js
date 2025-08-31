@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js";
 import 'dotenv/config'
 import movieRoutes from "./routes/movieRoutes.js"
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { swaggerDocs } from "./swagger/swagger.js";
 
 // app config
 const app = express()
@@ -28,3 +29,5 @@ app.listen(port, () => {
     console.log(`port started on ${port}`)
 })
 
+// swagger
+swaggerDocs(app, port);
